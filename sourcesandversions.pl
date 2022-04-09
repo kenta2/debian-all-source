@@ -19,7 +19,7 @@ unless(defined$s{$source}){
         $s{$source}.=" $binary";
     } else {
         unless(defined$hardcode{$source}){
-            print "many versions: source=$source $ver($binary), $v2($others)";
+            die "many versions: source=$source $ver($binary), $v2($others)";
         }
     }
 }
