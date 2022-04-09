@@ -1,9 +1,11 @@
 #!perl -nlw
 die unless ($installed,$binary,$source)=m/^\(.(.).\) (\S+) \S+ (\S+ \S+)$/;
 next unless $installed eq 'i';
-next unless $binary eq 'linux-headers-amd64';
-$c++;
+next unless $binary eq 'linux-headers-amd64' or $binary eq 'linux-libc-dev:amd64';
+$c{$binary}++;
 print$source;
 END{
-die unless $c==1;
+    for(keys%c){
+	die unless $c{$_}==1;
+    }
 }
