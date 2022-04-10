@@ -1,6 +1,6 @@
 #!/bin/bash
 # keeps a history of dpkg in git in /var/lib
-# user must initialize /var/lib/debianallsource as a git repo and cjeck in an initial dpkg.out, ok if empty
+# user must initialize /var/lib/debianallsource as a git repo and check in an initial dpkg.out, ok if empty
 
 # install dpkg hook:
 # /etc/apt/apt.conf.d/04debianallsource
