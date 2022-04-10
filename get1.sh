@@ -17,11 +17,13 @@ exit 1
 fi
 target=$3
 d=`mktemp -d`
-set +e
 pushd "$d"
-apt-get source "$source=$version"
+apt-get source --only-source "$source=$version" || true NO SOURCE FOUND
 popd
 if [ "$(find "$d" -mindepth 1 -maxdepth 1 -type d | wc -l)" = 1 ]
 then find "$d" -mindepth 1 -maxdepth 1 -type d -exec mv '{}' "$target/$source" \;
+     for special in .gitignore .gitattributes
+     do find "$target/$source" -name "$special" -exec mv '{}' '{}'.renamed-das \;
+     done
 fi
 rm -fr "$d"
