@@ -34,3 +34,4 @@ time git commit -m "$0"
 git status --ignored
 popd
 # 41m to do everything
+true All done $0
