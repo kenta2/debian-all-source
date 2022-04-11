@@ -2,6 +2,7 @@
 BEGIN{
     die unless defined$ENV{hardcode};
     open FI,$ENV{hardcode} or die;
+    # when same source, two different versions, hardcode the correct one
     while(<FI>){
         @F=split;
         die unless @F==2;
