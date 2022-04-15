@@ -6,31 +6,35 @@ BEGIN{
     while(<FI>){
         @F=split;
         die unless @F==2;
+        die if$hardcode{$F[0]};
         $hardcode{$F[0]}=$F[1];
     }
 }
-die unless ($installed,$binary,$source,$ver)=m/^\(.(.).\) (\S+ \S+) (\S+) (\S+)$/;
+die unless ($installed,$source,$ver)=m/^\(.(.).\) \S+ \S+ (\S+) (\S+)$/;
 next unless $installed eq 'i';
-unless(defined$s{$source}){
-    $s{$source}="$ver $binary";
-} else {
-    $_=$s{$source};
-    die unless ($v2,$others)=/^(\S+) (.*)/;
-    if($v2 eq $ver){
-        $s{$source}.=" $binary";
+if(defined($h=$hardcode{$source})){
+    if($h ne $ver){
+        print STDERR "ignoring $_";
+        # pretend the package is not installed.
     } else {
-        unless(defined$hardcode{$source}){
-            die "many versions: source=$source $ver($binary), $v2($others)";
+        if(defined($pv=$s{$source})){
+            die unless$pv eq $h;
+        } else {
+            $s{$source}=$h; # == $ver
         }
     }
-}
-END{
-    for(sort keys%hardcode){
-        print"$_ $hardcode{$_}";
+} else{
+    if(defined($pv=$s{$source})){
+        unless($pv eq $ver){
+            die "collision on $source: $pv and $ver";
+        }
+    } else {
+        $s{$source}=$ver;
     }
+}
+
+END{
     for$p(sort keys%s){
-        $_=$s{$p};
-        die unless ($v)=/^(\S+)/;
-        print"$p $v";
+        print"$p $s{$p}";
     }
 }
