@@ -7,8 +7,10 @@
 # installed.  The desired version of the "linux-signed-amd64" source
 # package may be deduced by looking at the version corresponding to
 # the "linux-headers-amd64" binary package (which would need to be
-# installed).  Similarly, deduce the desired version of "linux" source
-# package from "linux-libc-dev:amd64".  This is a hack.
+# installed).  Similarly, the "linux" source package is the source for
+# multiple versions "linux-headers-$VERSION-amd64 (seen on Debian
+# bullseye).  Deduce the desired version from "linux-libc-dev:amd64".
+# This is a hack.
 
 die unless ($installed,$binary,$source)=m/^\(.(.).\) (\S+) \S+ (\S+ \S+)$/;
 next unless $installed eq 'i';
