@@ -11,7 +11,8 @@ perl linuxhardcode.pl "$target/dpkg.out" > "$linuxversionfile"
 sourcesandversions=$target/sourcesandversions
 t=$(mktemp -d)
 pushd $target
-# just in case an updated version is sticking around
+# we need the old version of this file in order to calculate what has changed.
+# do git checkout just in case an updated version is sticking around.
 git checkout sourcesandversions-pruned
 popd
 
