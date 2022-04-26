@@ -1,5 +1,4 @@
 #!perl -lw
-die unless defined$ENV{hardcode};
 if(defined$ENV{linuxversion}){
     open FI,$ENV{linuxversion} or die;
     # when same source, two different versions, hardcode the correct one
