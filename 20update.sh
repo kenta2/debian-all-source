@@ -6,7 +6,8 @@ then echo need target 1>&2
      exit 1
 fi
 target=$1
-perl linuxhardcode.pl "$target/dpkg.out" > "$target/hardcode"
+linuxversionfile=$target/linuxversion
+perl linuxhardcode.pl "$target/dpkg.out" > "$linuxversionfile"
 sourcesandversions=$target/sourcesandversions
 t=$(mktemp -d)
 pushd $target
@@ -14,7 +15,7 @@ pushd $target
 git checkout sourcesandversions-pruned
 popd
 
-hardcode=$target/hardcode perl sourcesandversions.pl "$target/dpkg.out" | sort > "$sourcesandversions"
+linuxversion=$linuxversionfile perl sourcesandversions.pl "$target/dpkg.out" | sort > "$sourcesandversions"
 bash make-actions.sh "$sourcesandversions-pruned" "$sourcesandversions" "$t"
 pushd $target/packages
 perl -nlwae 'print$F[0]if(-e$F[0])' "$t/remove" > "$t/gitremove"

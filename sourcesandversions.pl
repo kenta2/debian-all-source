@@ -1,13 +1,18 @@
 #!perl -nlw
 BEGIN{
     die unless defined$ENV{hardcode};
-    open FI,$ENV{hardcode} or die;
-    # when same source, two different versions, hardcode the correct one
-    while(<FI>){
-        @F=split;
-        die unless @F==2;
-        die if$hardcode{$F[0]};
-        $hardcode{$F[0]}=$F[1];
+    if(defined$ENV{linuxversion}){
+        open FI,$ENV{linuxversion} or die;
+        # when same source, two different versions, hardcode the correct one
+        while(<FI>){
+            @F=split;
+            die unless @F==2;
+            die if$hardcode{$F[0]};
+            $hardcode{$F[0]}=$F[1];
+        }
+    } else {
+        # proceed onward, error may occur later if you have two linux versions installed
+        #die "expecting ENV linuxversion";
     }
 }
 die unless ($installed,$source,$ver)=m/^\(.(.).\) \S+ \S+ (\S+) (\S+)$/;
