@@ -21,3 +21,21 @@ cd debian-all-source
 bash dpkgdump.sh > ~/target/dpkg.out
 bash 20update.sh ~/target
 ```
+
+If you have installed binaries corresponding to two different versions
+of the same source, things will fail.  First, put the source and
+version to ignore in a file:
+
+file: toignore
+```
+# Debian Bullseye transition from icu67 to icu71
+icu 67.1-7
+```
+
+Then, provide the filename using the `ignoreversions` environment
+variable to the 20update or 10initialize script.  For example, in
+`bash`:
+
+```
+ignoreversions=~/target/toignore bash 20update.sh ~/target
+```
