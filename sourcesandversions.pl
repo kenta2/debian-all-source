@@ -18,6 +18,7 @@ if(defined$ENV{ignoreversions}){
     open FI,$ENV{ignoreversions} or die;
     while(<FI>){
 	next if /^#/; #ignore comments
+	next if /^\s*$/; #ignore blank lines
 	die if /=/;
         @F=split;
         die unless @F==2;
