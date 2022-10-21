@@ -1,0 +1,5 @@
+# https://release.debian.org/transitions/html/auto-ffmpeg.html
+# mplayer depends on libavcodec58, which is sourced from an old version of ffmpeg
+ffmpeg 7:4.4.2-1
+# libavcodec58 also depends on an old version of srt
+srt 1.4.4-4
