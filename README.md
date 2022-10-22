@@ -28,8 +28,10 @@ bash 20update.sh ~/target
 ```
 
 If you have installed binaries corresponding to two different versions
-of the same source, things will fail.  First, put the source and
-version to ignore in a file:
+of the same source, things will fail.  In Debian Sid (maybe others),
+this can happen "naturally" as packages gradually migrate dependencies
+to a new version.  To prevent the script from failing, put a source
+and version to ignore in a file:
 
 file: ignoreversions.txt
 ```
