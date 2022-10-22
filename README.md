@@ -1,7 +1,7 @@
 # debian-all-source
 
-Scripts to maintain a local git repository of sources of all Debian
-packages on a system
+Scripts to maintain a local git repository of source code to all
+Debian packages on a system
 
 ## Running for the first time
 
@@ -54,7 +54,7 @@ The files `.gitignore` and `.gitattributes`, if present in the source
 code, interfere with the functioning of this script, so they are
 automatically renamed `.gitignore.renamed-das` and
 `.gitattributes.renamed-das` ("das" = "Debian All Source") by the
-``get1.sh` script.
+`get1.sh` script.
 
 There are some useful scripts in `useful-scripts/'` including how to
 install a dpkg hook so that some of this can happen automatically, and
