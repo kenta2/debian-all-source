@@ -6,6 +6,10 @@ then echo need target 1>&2
      exit 1
 fi
 target=$1
+
+#needed for sort, comm
+export LC_ALL=C
+
 linuxversionfile=$target/linuxversion
 perl linuxhardcode.pl "$target/dpkg.out" > "$linuxversionfile"
 sourcesandversions=$target/sourcesandversions
