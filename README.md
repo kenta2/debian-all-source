@@ -5,7 +5,8 @@ Debian packages on a system
 
 ## Running for the first time
 
-Be sure you have `deb-src` lines in /etc/apt/sources.list .
+Be sure you have `deb-src` lines in /etc/apt/sources.list .  The local
+git repository will be created in `~/target` .
 
 ```
 cd debian-all-source
@@ -67,6 +68,6 @@ packages like headers.  This would cause the script to fail, so
 `linuxhardcode.pl` deals with this by choosing only one Linux source
 version.
 
-Once a binary package gets updated, its old source code disappears, so
-you cannot delay very much between upgrading your system (`apt
-full-upgrade`) and updating the source code.
+Once a binary package gets updated, its old source code disappears
+from package servers, so you cannot delay very much between upgrading
+your system (`apt full-upgrade`) and updating the source code.
