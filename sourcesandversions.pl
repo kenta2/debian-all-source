@@ -45,7 +45,8 @@ while(<>){
 	$ignorecheck{"$source=$ver"}=1;
     } elsif(defined($pv=$s{$source})){
 	unless($pv eq $ver){
-	    die "collision on $source: $pv and $ver";
+	    print STDERR "collision on $source: $pv and $ver";
+	    $bad=1;
 	}
     } else {
 	$s{$source}=$ver;
@@ -55,9 +56,11 @@ while(<>){
 # force the file to stay up to date.  not sure if this is a good idea.
 for$i(sort keys%ignore){
     unless($ignorecheck{$i}){
-	die "ignoreversions has package $i but not seen in input";
+	print STDERR "ignoreversions has package $i but not seen in input";
+	$bad=1;
     }
 }
+die if $bad;
 for$p(sort keys%s){
     print"$p $s{$p}";
 }
