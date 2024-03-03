@@ -31,7 +31,7 @@ while(<>){
     next unless $installed eq 'i';
     if(defined($h=$hardcode{$source})){
         if($h ne $ver){
-            print STDERR "ignoring $_ because $ver is hardcoded";
+            print STDERR "    ignoring $_     because $ver is hardcoded";
             # pretend the package is not installed.
         } else {
             if(defined($pv=$s{$source})){
@@ -41,11 +41,11 @@ while(<>){
             }
         }
     } elsif(defined($ignore{"$source=$ver"})) {
-	print STDERR "ignoring $_ as directed in ignoreversions file";
+	print STDERR "    ignoring $_     as directed in ignoreversions file";
 	$ignorecheck{"$source=$ver"}=1;
     } elsif(defined($pv=$s{$source})){
 	unless($pv eq $ver){
-	    print STDERR "collision on $source: $pv and $ver";
+	    print STDERR "ERROR: collision on $source: $pv and $ver";
 	    $bad=1;
 	}
     } else {
@@ -56,7 +56,7 @@ while(<>){
 # force the file to stay up to date.  not sure if this is a good idea.
 for$i(sort keys%ignore){
     unless($ignorecheck{$i}){
-	print STDERR "ignoreversions has package $i but not seen in input";
+	print STDERR "ERROR: ignoreversions has package $i but not seen in input";
 	$bad=1;
     }
 }
