@@ -71,3 +71,9 @@ version.
 Once a binary package gets updated, its old source code disappears
 from package servers, so you cannot delay very much between upgrading
 your system (`apt full-upgrade`) and updating the source code.
+
+### Similar tools
+
+apt-listdifferences
+
+`debdiff` in the devscripts package
